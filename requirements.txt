@@ -3,7 +3,7 @@ numpy
 matplotlib
 networkx
 streamlit
-st_aggrid
+st-aggrid==0.3.4
 plotly
 seaborn
 scikit-learn
