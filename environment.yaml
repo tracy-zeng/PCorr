@@ -1,5 +1,6 @@
 name: pcorr_env
 channels:
+  - conda-forge
   - bioconda
   - https://conda.anaconda.org/salilab
   - defaults
