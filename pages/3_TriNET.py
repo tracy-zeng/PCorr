@@ -23,7 +23,7 @@ st.markdown("### Functional protein complexes")
 st.markdown("---")
 
 # 读取数据
-df_all = pickle.load(open(os.path.join(script_dir, "data/de novo TriNET.pkl"), 'rb'))
+df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_TriNET.pkl"), 'rb'))
 df_all = df_all.sort_values(by='Complex size',ascending=True)
 
 # ====== 添加侧边栏统一阈值设置 ======
@@ -91,7 +91,7 @@ def load_tpi_comp_source():
 
 @st.cache_data
 def load_de_novo_tpis():
-    return pickle.load(open(os.path.join(script_dir, "data/de novo TPIs.pkl"), 'rb'))
+    return pickle.load(open(os.path.join(script_dir, "data/de_novo_TPIs.pkl"), 'rb'))
 
 if selected_rows:
     complex_genes_str = selected_rows[0].get("Complex", "")

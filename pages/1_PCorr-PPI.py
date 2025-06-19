@@ -19,7 +19,7 @@ st.markdown("### Functional protein-protein interactions (PPIs)")
 st.markdown("---")
 
 # 读取数据
-df_all = pickle.load(open(os.path.join(script_dir, "data/de novo PPIs.pkl"), 'rb'))
+df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_PPIs.pkl"), 'rb'))
 df_all = df_all.sort_values(by="PCorr-PPI score", ascending=False)
 
 # ====== 添加侧边栏统一阈值设置 ======

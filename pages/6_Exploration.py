@@ -34,14 +34,14 @@ def standardize_smi(smi):
 
 @st.cache_data
 def load_relation_data():
-    df_ppi_all = pickle.load(open(os.path.join(script_dir, "data/de novo PPIs.pkl"), 'rb'))
-    df_tpi_all = pickle.load(open(os.path.join(script_dir, "data/de novo TPIs.pkl"), 'rb'))
-    df_trinet_all = pickle.load(open(os.path.join(script_dir, "data/de novo TriNET.pkl"), 'rb'))
+    df_ppi_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_PPIs.pkl"), 'rb'))
+    df_tpi_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_TPIs.pkl"), 'rb'))
+    df_trinet_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_TriNET.pkl"), 'rb'))
     return df_ppi_all, df_tpi_all, df_trinet_all
 
 @st.cache_data
 def load_DGI_data():
-    df_dgi_all = pickle.load(open(os.path.join(script_dir, "data/de novo DGIs.pkl"), 'rb'))
+    df_dgi_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_DGIs.pkl"), 'rb'))
     return df_dgi_all
 
 def draw_network_from_genes(gene_str, dgi_df):
