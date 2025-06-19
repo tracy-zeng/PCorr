@@ -5,10 +5,13 @@ dependencies:
   - python=3.11
   - pandas
   - numpy
+  - matplotlib
   - rdkit
+  - networkx
   - pip
   - pip:
       - streamlit
       - st-aggrid
-      - matplotlib
-      - networkx
+      - plotly
+      - seaborn
+      - scikit-learn
