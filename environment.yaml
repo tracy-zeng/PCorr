@@ -1,0 +1,14 @@
+name: pcorr
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - rdkit
+  - pip
+  - pip:
+      - streamlit
+      - st-aggrid
+      - matplotlib
+      - networkx
