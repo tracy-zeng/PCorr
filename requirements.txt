@@ -7,4 +7,4 @@ streamlit-aggrid
 plotly
 seaborn
 scikit-learn
-rdkit-pypi==2023.9.5
+rdkit-pypi==2022.9.5
