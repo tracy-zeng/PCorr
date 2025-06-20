@@ -169,7 +169,7 @@ if query_type == "Drug":
         if not df_result.empty:
             st.session_state["df_result"] = df_result
             df_ppi_all, df_tpi_all, df_trinet_all = load_relation_data()
-            score_threshold = st.sidebar.slider("Minimum interaction score", 0.6, 1.0, 0.8, 0.01)
+            score_threshold = st.sidebar.slider("Minimum interaction score", 0.8, 1.0, 0.8, 0.01)
 
             def extract_genes_from_col(series):
                 genes = set()
@@ -234,7 +234,7 @@ elif query_type == "Gene":
 
     if gene_input:
         # 设置阈值
-        score_threshold = st.sidebar.slider("Minimum interaction score", 0.6, 1.0, 0.8, 0.01)
+        score_threshold = st.sidebar.slider("Minimum interaction score", 0.8, 1.0, 0.8, 0.01)
         gene = gene_input.strip()
 
         # 提取子集
