@@ -52,6 +52,7 @@ else:
 st.markdown("#### TPCA-PCorr-TPI results")
 
 st.caption("📌 Tip: Click a row in the table below to view its PCorr and TPCA signal plots.")
+st.info("Only a subset of interactions is shown below.")
 
 # ---- 构建 AgGrid ----
 gb = GridOptionsBuilder.from_dataframe(filtered_df)

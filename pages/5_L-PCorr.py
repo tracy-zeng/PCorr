@@ -64,6 +64,7 @@ else:
         filtered_df = df.copy()
 
 st.markdown("#### All L-PCorr results")
+st.info("Only a subset of interactions is shown below.")
 
 # ---- 构建 AgGrid ----
 gb = GridOptionsBuilder.from_dataframe(filtered_df)

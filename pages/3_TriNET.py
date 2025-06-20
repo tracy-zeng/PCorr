@@ -50,6 +50,7 @@ else:
 st.markdown("#### TriNET results")
 
 st.caption("📌 Tip: Click a row in the table below to view its TriNET details.")
+st.info("Only a subset of interactions is shown below.")
 
 # ---- 构建 AgGrid ----
 gb = GridOptionsBuilder.from_dataframe(filtered_df)
