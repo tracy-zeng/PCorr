@@ -87,11 +87,11 @@ if isinstance(selected_rows, pd.DataFrame):
 
 @st.cache_data
 def load_tpi_comp_source():
-    return pickle.load(open(os.path.join(script_dir, "data/tpi_comp_source_08.pkl"), 'rb'))
+    return pickle.load(open(os.path.join(script_dir, "data/tpi_comp_source.pkl"), 'rb'))
 
 @st.cache_data
 def load_de_novo_tpis():
-    return pickle.load(open(os.path.join(script_dir, "data/de_novo_TPIs_08.pkl"), 'rb'))
+    return pickle.load(open(os.path.join(script_dir, "data/de_novo_TPIs.pkl"), 'rb'))
 
 if selected_rows:
     complex_genes_str = selected_rows[0].get("Complex", "")
