@@ -220,27 +220,23 @@ if query_type == "Drug":
                 st.session_state['selected_drug'] = selected_rows[0].get("Drug name", "DemoDrug")
                 if selected_gene:
                     st.markdown("---")
-                    df_ppi_sub = df_ppi_all[df_ppi_all["PPI"].str.split('-').apply(lambda genes: selected_gene in genes)].rename(columns={"PPI": "Complex"})
                     
-                    any_shown = False
-                    if not df_ppi_sub.empty:
-                        st.markdown(f"#### Interactions for {selected_gene}")
-                        display_relation_table("PPIs", df_ppi_sub, key="ppi")
-                        any_shown = True
+                    df_ppi_sub = df_ppi_all[df_ppi_all["PPI"].str.split('-').apply(lambda genes: selected_gene in genes)].rename(columns={"PPI": "Complex"})
                     df_tpi_sub = df_tpi_all[df_tpi_all["TPI"].str.split('-').apply(lambda genes: selected_gene in genes)].rename(columns={"TPI": "Complex"})
-                    if not df_tpi_sub.empty:
-                        st.markdown(f"#### Interactions for {selected_gene}")
-                        display_relation_table("TPIs", df_tpi_sub, key="tpi")
-                        any_shown = True
                     df_tri_sub = df_trinet_all[df_trinet_all["Complex"].str.split('-').apply(lambda genes: selected_gene in genes)]
-                    if not df_tri_sub.empty:
+                    
+                    any_shown = not df_ppi_sub.empty or not df_tpi_sub.empty or not df_tri_sub.empty
+                    
+                    if any_shown:
                         st.markdown(f"#### Interactions for {selected_gene}")
-                        display_relation_table("TriNET Complexes", df_tri_sub, key="trinet")
-                        any_shown = True
-                    if not any_shown:
-                        st.info(f"No interactions for {selected_gene}.")
+                        if not df_ppi_sub.empty:
+                            display_relation_table("PPIs", df_ppi_sub, key="ppi")
+                        if not df_tpi_sub.empty:
+                            display_relation_table("TPIs", df_tpi_sub, key="tpi")
+                        if not df_tri_sub.empty:
+                            display_relation_table("TriNET Complexes", df_tri_sub, key="trinet")
                     else:
-                        st.markdown(f"#### Interactions for {selected_gene}")
+                        st.info(f"No interactions for {selected_gene}.")
 elif query_type == "Gene":
     # 加载数据
     df_ppi_all, df_tpi_all, df_trinet_all = load_relation_data()
@@ -287,19 +283,25 @@ elif query_type == "Gene":
         any_shown = False
         if not df_ppi_sub.empty:
             df_ppi_sub = df_ppi_sub.rename(columns={"PPI": "Complex"})
-            display_relation_table("PPIs", df_ppi_sub, key="gene_ppi")
             any_shown = True
         if not df_tpi_sub.empty:
             df_tpi_sub = df_tpi_sub.rename(columns={"TPI": "Complex"})
-            display_relation_table("TPIs", df_tpi_sub, key="gene_tpi")
             any_shown = True
         if not df_tri_sub.empty:
-            display_relation_table("TriNET Complexes", df_tri_sub, key="gene_trinet")
             any_shown = True
-        if not any_shown:
-            st.info(f"No interactions for {gene_input}.")
-        else:
+        
+        # 如果有任何数据，再显示标题和表格
+        if any_shown:
             st.markdown(f"#### Interactions for {gene_input}")
+            if not df_ppi_sub.empty:
+                display_relation_table("PPIs", df_ppi_sub, key="gene_ppi")
+            if not df_tpi_sub.empty:
+                display_relation_table("TPIs", df_tpi_sub, key="gene_tpi")
+            if not df_tri_sub.empty:
+                display_relation_table("TriNET Complexes", df_tri_sub, key="gene_trinet")
+        else:
+            st.info(f"No interactions for {gene_input}.")
+            
 
 
 
