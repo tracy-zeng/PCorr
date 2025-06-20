@@ -19,12 +19,12 @@ st.markdown("### Functional protein-protein interactions (PPIs)")
 st.markdown("---")
 
 # 读取数据
-df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_PPIs_08.pkl"), 'rb'))
+df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_PPIs_08_random.pkl"), 'rb'))
 df_all = df_all.sort_values(by="PCorr-PPI score", ascending=False)
 
 # ====== 添加侧边栏统一阈值设置 ======
 st.sidebar.markdown("## Filters")
-score_threshold = st.sidebar.slider("Minimum interaction score", 0.8, 1.0, 0.95, 0.01)
+score_threshold = st.sidebar.slider("Minimum interaction score", 0.8, 1.0, 0.9, 0.01)
 
 df = df_all[df_all["PCorr-PPI score"] > score_threshold].copy()
 
