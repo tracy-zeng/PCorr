@@ -23,7 +23,7 @@ st.markdown("### Functional ternary protein interactions (TPIs)")
 st.markdown("---")
 
 # 读取数据
-df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_TPIs_08.pkl"), 'rb'))
+df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_TPIs_08_random.pkl"), 'rb'))
 df_all = df_all.sort_values(by="TPCA-PCorr-TPI score", ascending=False)
 
 

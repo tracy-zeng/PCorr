@@ -30,11 +30,11 @@ interaction_type = st.radio("👇 Select an interaction type:", options=interact
 
 # 根据选择读取不同的数据
 if interaction_type == "TPI":
-    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_tpi_08.pkl"), 'rb'))
+    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_tpi_08_random.pkl"), 'rb'))
     df_all = df_all.drop_duplicates().reset_index(drop=True)
     df_all = df_all.sort_values(by="TPCA-PCorr-TPI score", ascending=False)
 else:
-    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_{}_08.pkl".format(interaction_type.lower())), 'rb'))
+    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_{}_08_random.pkl".format(interaction_type.lower())), 'rb'))
     df_all = df_all.drop_duplicates().reset_index(drop=True)
     df_all = df_all.sort_values(by="PCorr-{} score".format(interaction_type), ascending=False)
 
