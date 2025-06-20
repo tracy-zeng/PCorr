@@ -40,7 +40,7 @@ else:
 
 # ====== 添加侧边栏统一阈值设置 ======
 st.sidebar.markdown("## Filters")
-score_threshold = st.sidebar.slider("Minimum interaction score", 0.8, 1.0, 0.8, 0.01)
+score_threshold = st.sidebar.slider("Minimum interaction score", 0.9, 1.0, 0.8, 0.01)
 
 if interaction_type == "TPI":
     df = df_all[df_all["TPCA-PCorr-TPI score"] > score_threshold].copy()
