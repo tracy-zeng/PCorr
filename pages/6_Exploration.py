@@ -19,7 +19,7 @@ import io
 
 script_dir = os.path.dirname(os.path.dirname(__file__))
 
-st.set_page_config(page_title="Exploration", layout="centered", page_icon=":material/diagonal_line:")
+st.set_page_config(page_title="Exploration", layout="centered", page_icon=":material/mystery:")
 st.markdown("### Hypothesis generating")
 st.markdown("---")
 
@@ -145,13 +145,19 @@ if query_type == "Drug":
 
     if user_query:
         df_result = pd.DataFrame()
+
         if input_type == "Drug id":
             df_result = df_all[df_all["Drug id"] == user_query].reset_index(drop=True)
+            if df_result.empty:
+                st.warning(f"No match found for Drug id: '{user_query}'")
+
         elif input_type == "Drug name":
             if "name_normalized" not in df_all.columns:
                 df_all["name_normalized"] = df_all["Drug name"].str.lower().apply(lambda x: re.sub(r'[^a-z0-9]', '', str(x)))
+
             user_query_lc = re.sub(r'[^a-z0-9]', '', user_query.lower())
             matched_df = df_all[df_all["name_normalized"].str.contains(user_query_lc, na=False)]
+
             if not matched_df.empty:
                 drug_options = [f"{row['Drug id']} | {row['Drug name']}" for _, row in matched_df.iterrows()]
                 selected_drugs = st.multiselect(f"{len(set(drug_options))} matched drugs:", sorted(set(drug_options)))
@@ -159,12 +165,21 @@ if query_type == "Drug":
                 df_selected = matched_df[matched_df["Drug id"].isin(selected_ids)]
                 if not df_selected.empty:
                     df_result = df_selected.iloc[:, :-1].reset_index(drop=True)
+                else:
+                    st.info("No drug selected from the matched list.")
+            else:
+                st.warning(f"No match found for Drug name: '{user_query}'")
+
         elif input_type == "SMILES":
             query_smi_std = standardize_smi(user_query)
             if query_smi_std:
                 matched_df = df_all[df_all["SMILES"] == query_smi_std]
                 if not matched_df.empty:
                     df_result = matched_df.reset_index(drop=True)
+                else:
+                    st.warning(f"No match found for SMILES: '{query_smi_std}'")
+            else:
+                st.error("Invalid SMILES input. Please check the format.")
 
         if not df_result.empty:
             st.session_state["df_result"] = df_result
