@@ -17,7 +17,7 @@ def run():
         page_title="PCorr",
         page_icon=":material/forest:",
         layout="centered",
-        initial_sidebar_state="auto",
+        initial_sidebar_state="expanded",
     )
     
     script_dir = os.path.dirname(__file__)

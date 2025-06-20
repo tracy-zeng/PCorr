@@ -32,6 +32,11 @@ score_threshold = st.sidebar.slider("Minimum interaction score", 0.8, 1.0, 0.8, 
 
 df = df_all[df_all["TriNET score"] > score_threshold].copy()
 
+st.markdown("#### TriNET results")
+
+st.caption("📌 Tip: Click a row in the table below to view its TriNET details.")
+st.info("Only a subset of interactions is shown below.")
+
 # ---- 筛选列选择 ----
 col_to_filter = st.selectbox("🔍 Select a column to filter", df.columns)
 
@@ -47,15 +52,11 @@ else:
     else:
         filtered_df = df.copy()
 
-st.markdown("#### TriNET results")
-
-st.caption("📌 Tip: Click a row in the table below to view its TriNET details.")
-st.info("Only a subset of interactions is shown below.")
-
 # ---- 构建 AgGrid ----
 gb = GridOptionsBuilder.from_dataframe(filtered_df)
 gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)  # 每页20行，可自定义
 gb.configure_selection(selection_mode="single", use_checkbox=False)
+gb.configure_grid_options(enableCellTextSelection=True)
 grid_options = gb.build()
 
 grid_response = AgGrid(

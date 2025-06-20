@@ -116,6 +116,7 @@ def display_relation_table(title, df, key, complex_col='Complex'):
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_selection(selection_mode="single", use_checkbox=False)
     gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=10)
+    gb.configure_grid_options(enableCellTextSelection=True)
     grid_options = gb.build()
 
     grid_response = AgGrid(
@@ -141,7 +142,14 @@ def display_relation_table(title, df, key, complex_col='Complex'):
 if query_type == "Drug":
     df_all = load_DGI_data()
     input_type = st.selectbox("Select input type:", ["Drug id", "Drug name", "SMILES"])
-    user_query = st.text_input("Enter value:")
+    
+    # 根据 input_type 设置不同的输入框 placeholder
+    if input_type == "Drug id":
+        user_query = st.text_input("Enter Drug id:", placeholder="e.g. D865")
+    elif input_type == "Drug name":
+        user_query = st.text_input("Enter Drug name:", placeholder="e.g. PLX-4720")
+    elif input_type == "SMILES":
+        user_query = st.text_input("Enter SMILES:", placeholder="e.g. CCCS(=O)(=O)Nc1ccc(F)c(C(=O)c2c[nH]c3ncc(Cl)cc23)c1F")
 
     if user_query:
         df_result = pd.DataFrame()
@@ -208,6 +216,7 @@ if query_type == "Drug":
             gb = GridOptionsBuilder.from_dataframe(df_result_display)
             gb.configure_selection(selection_mode="single", use_checkbox=False)
             gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
+            gb.configure_grid_options(enableCellTextSelection=True)
             grid_options = gb.build()
 
             st.markdown("#### Matched DGIs")
@@ -243,7 +252,7 @@ elif query_type == "Gene":
     df_all = load_DGI_data()
 
     # 输入框
-    gene_input = st.text_input("Enter a gene symbol:")
+    gene_input = st.text_input("Enter a gene symbol:", placeholder="e.g. BRAF")
 
     if gene_input:
         # 设置阈值
