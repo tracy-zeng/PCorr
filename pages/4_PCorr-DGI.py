@@ -22,7 +22,7 @@ st.markdown("### Drug-Gene Interactions (DGIs)")
 st.markdown("---")
 
 # 读取数据
-df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_DGIs.pkl"), 'rb'))
+df_all = pickle.load(open(os.path.join(script_dir, "data/de_novo_DGIs_08.pkl"), 'rb'))
 df_all = df_all.sort_values(by="PCorr-DGI score", ascending=False)
 
 # ====== 添加侧边栏统一阈值设置 ======

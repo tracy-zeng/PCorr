@@ -30,11 +30,11 @@ interaction_type = st.radio("👇 Select an interaction type:", options=interact
 
 # 根据选择读取不同的数据
 if interaction_type == "TPI":
-    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_tpi.pkl"), 'rb'))
+    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_tpi_08.pkl"), 'rb'))
     df_all = df_all.drop_duplicates().reset_index(drop=True)
     df_all = df_all.sort_values(by="TPCA-PCorr-TPI score", ascending=False)
 else:
-    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_{}.pkl".format(interaction_type.lower())), 'rb'))
+    df_all = pickle.load(open(os.path.join(script_dir, "data/ls_{}_08.pkl".format(interaction_type.lower())), 'rb'))
     df_all = df_all.drop_duplicates().reset_index(drop=True)
     df_all = df_all.sort_values(by="PCorr-{} score".format(interaction_type), ascending=False)
 
@@ -93,7 +93,7 @@ st.download_button(
 
 #%%
 
-df_l = pickle.load(open(os.path.join(script_dir, "data/ls_{}_bylineage.pkl".format(interaction_type.lower())), 'rb'))
+df_l = pickle.load(open(os.path.join(script_dir, "data/ls_{}_bylineage_08.pkl".format(interaction_type.lower())), 'rb'))
 
 # lineage 选择框（默认选择 Skin）
 lineages = sorted(list(df_l.keys()))
