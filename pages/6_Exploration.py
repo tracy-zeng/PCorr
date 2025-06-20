@@ -239,6 +239,8 @@ if query_type == "Drug":
                         any_shown = True
                     if not any_shown:
                         st.info(f"No interactions for {selected_gene}.")
+                    else:
+                        st.markdown(f"#### Interactions for {selected_gene}")
 elif query_type == "Gene":
     # 加载数据
     df_ppi_all, df_tpi_all, df_trinet_all = load_relation_data()
@@ -280,25 +282,24 @@ elif query_type == "Gene":
         st.session_state["df_result"] = df_all
         
         st.markdown("---")
-
+        
         # 展示各表，先 rename 为 Complex
         any_shown = False
         if not df_ppi_sub.empty:
             df_ppi_sub = df_ppi_sub.rename(columns={"PPI": "Complex"})
-            st.markdown(f"#### Interactions for {gene_input}")
             display_relation_table("PPIs", df_ppi_sub, key="gene_ppi")
             any_shown = True
         if not df_tpi_sub.empty:
             df_tpi_sub = df_tpi_sub.rename(columns={"TPI": "Complex"})
-            st.markdown(f"#### Interactions for {gene_input}")
             display_relation_table("TPIs", df_tpi_sub, key="gene_tpi")
             any_shown = True
         if not df_tri_sub.empty:
-            st.markdown(f"#### Interactions for {gene_input}")
             display_relation_table("TriNET Complexes", df_tri_sub, key="gene_trinet")
             any_shown = True
         if not any_shown:
             st.info(f"No interactions for {gene_input}.")
+        else:
+            st.markdown(f"#### Interactions for {gene_input}")
 
 
 
